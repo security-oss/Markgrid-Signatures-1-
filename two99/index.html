@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Two99 Signature Generator</title>
+    <style>
+        body {
+            font-family: 'Satoshi Variable', Arial, sans-serif;
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 1rem;
+            color: #0070ff;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .form-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        input[type="text"],
+        input[type="tel"],
+        input[type="url"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        .logo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        .logo-option {
+            position: relative;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            cursor: pointer;
+            background: #fafafa;
+            transition: border-color 0.15s, box-shadow 0.15s;
+            text-align: center;
+        }
+        .logo-option:hover {
+            border-color: #99c2ff;
+        }
+        .logo-option.selected {
+            border-color: #0070ff;
+            box-shadow: 0 0 0 3px rgba(0, 112, 255, 0.15);
+            background: #f0f7ff;
+        }
+        .logo-option input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .logo-option img {
+            width: 100%;
+            max-width: 140px;
+            aspect-ratio: 1;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto 8px;
+            border-radius: 4px;
+        }
+        .logo-option .caption {
+            font-size: 12px;
+            color: #444;
+            font-weight: 500;
+            line-height: 1.3;
+        }
+        button[type="submit"] {
+            background-color: #0070ff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        #preview {
+            margin-top: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: white;
+        }
+        kbd {
+            background: #eee;
+            border-radius: 3px;
+            border: 1px solid #b4b4b4;
+            box-shadow: 0 1px 1px rgba(0,0,0,.2);
+            padding: 2px 4px;
+        }
+    </style>
+</head>
+<body>
+    <a class="back-link" href="../">← All generators</a>
+    <div class="form-container">
+        <h1>Two99 Signature Generator</h1>
+        <form id="signatureForm">
+            <div class="form-group">
+                <label>Logo style:</label>
+                <div class="logo-grid" id="logoGrid" role="radiogroup" aria-label="Logo style">
+                    <label class="logo-option selected">
+                        <input type="radio" name="logoStyle" value="profile_logomark_light" data-has-wordmark="true" data-theme="light" checked>
+                        <img src="images/profile_logomark_light.jpg" alt="Logomark light">
+                        <span class="caption">Logomark · Light</span>
+                    </label>
+                    <label class="logo-option">
+                        <input type="radio" name="logoStyle" value="profile_logomark_dark" data-has-wordmark="true" data-theme="dark">
+                        <img src="images/profile_logomark_dark.jpg" alt="Logomark dark">
+                        <span class="caption">Logomark · Dark</span>
+                    </label>
+                    <label class="logo-option">
+                        <input type="radio" name="logoStyle" value="profile_logo_light" data-has-wordmark="false" data-theme="light">
+                        <img src="images/profile_logo_light.jpg" alt="Full logo light">
+                        <span class="caption">Full logo · Light</span>
+                    </label>
+                    <label class="logo-option">
+                        <input type="radio" name="logoStyle" value="profile_logo_dark" data-has-wordmark="false" data-theme="dark">
+                        <img src="images/profile_logo_dark.jpg" alt="Full logo dark">
+                        <span class="caption">Full logo · Dark</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" required>
+            </div>
+            <div class="form-group">
+                <label for="designation">Designation:</label>
+                <input type="text" id="designation" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" placeholder="Enter number starting from +91" required>
+            </div>
+            <div class="form-group">
+                <label for="linkedin">LinkedIn URL:</label>
+                <input type="url" id="linkedin" required>
+            </div>
+            <button type="submit">Generate Signature</button>
+        </form>
+    </div>
+    <div id="preview"></div>
+
+    <div style="text-align: center; margin-top: 2rem; padding: 1.5rem; background-color: #f8f9fa; border-radius: 8px;">
+        <h3 style="color: #0070ff; margin-bottom: 1rem;">How to use your signature:</h3>
+        <ol style="text-align: left; list-style-position: inside; color: #333;">
+            <li>Pick a logo style (2×2 grid above)</li>
+            <li>Click "Generate Signature" to create your signature</li>
+            <li>In the new window that opens, press <kbd>Ctrl+A</kbd> (Windows) or <kbd>Cmd+A</kbd> (Mac) to select all content</li>
+            <li>Press <kbd>Ctrl+C</kbd> (Windows) or <kbd>Cmd+C</kbd> (Mac) to copy</li>
+            <li>Go to Gmail Settings → Signature</li>
+            <li>Paste the copied content using <kbd>Ctrl+V</kbd> (Windows) or <kbd>Cmd+V</kbd> (Mac)</li>
+            <li>Click "Save Changes" in Gmail</li>
+        </ol>
+    </div>
+
+    <script>
+        const logoGrid = document.getElementById('logoGrid');
+        logoGrid.addEventListener('change', function() {
+            logoGrid.querySelectorAll('.logo-option').forEach(function(el) {
+                el.classList.toggle('selected', el.querySelector('input').checked);
+            });
+        });
+
+        document.getElementById('signatureForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const designation = document.getElementById('designation').value;
+            const phone = document.getElementById('phone').value;
+            const linkedin = document.getElementById('linkedin').value;
+            const formattedPhone = phone.replace(/[^0-9]/g, '');
+
+            const selected = document.querySelector('input[name="logoStyle"]:checked');
+            const logoFile = selected.value;
+            const showWordmark = selected.dataset.hasWordmark === 'true';
+            const theme = selected.dataset.theme;
+
+            let baseUrl = window.location.href.split('?')[0].split('#')[0];
+            if (baseUrl.endsWith('index.html')) {
+                baseUrl = baseUrl.replace(/index\.html$/, '');
+            }
+            if (!baseUrl.endsWith('/')) baseUrl += '/';
+
+            const leftLogo = baseUrl + 'images/' + logoFile + '.jpg';
+            const wordmark = baseUrl + 'images/wordmark.png';
+            const wordmarkDark = baseUrl + 'images/wordmark-dark.png';
+            const linkedinIcon = baseUrl + 'images/li.png';
+            const wordmarkSrc = theme === 'dark' ? wordmarkDark : wordmark;
+
+            const wordmarkRow = showWordmark
+                ? `<img src="${wordmarkSrc}" alt="TWO99 Logo" style="width: 147px; height: auto; max-height: 28px; display: block; border: 0;" />`
+                : '';
+
+            const template = `
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <style>
+                        @import url('https://fonts.cdnfonts.com/css/satoshi');
+                    </style>
+                </head>
+                <body>
+                    <table style="font-family: 'Satoshi Variable', Arial, sans-serif; font-size: 13.6px; line-height: 1; color: #060916; border-collapse: collapse; width: 100%; max-width: 480px; height: 120px;">
+                        <tr>
+                            <td rowspan="5" style="width: 120px; text-align: center; padding-right: 24px; vertical-align: top; padding-top: 0; padding-bottom: 0;">
+                                <a href="https://two99.org/" target="_blank" style="text-decoration: none;">
+                                    <img src="${leftLogo}" alt="Logo" style="width: 120px; height: 120px; display: block; border: 0;" />
+                                </a>
+                            </td>
+                            <td style="padding: 0; vertical-align: top;">
+                                ${wordmarkRow}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-size: 14.4px; font-weight: 700; color: #060916; padding: 0; text-transform: uppercase; vertical-align: top;">
+                                ${name}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-size: 12.8px; font-weight: 500; color: #060916; padding: 0; margin-top: -5.6px; vertical-align: top;">
+                                ${designation}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-size: 12.8px; font-weight: 500; line-height: 1.3; color: #060916; padding-top: 4px; letter-spacing: 0.16px; vertical-align: top;">
+                                E-commerce
+                                <span style="font-weight: 700; color: #0070ff;"> / </span>
+                                Marketing
+                                <span style="font-weight: 700; color: #ffd700;"> / </span>
+                                Consulting
+                                <span style="font-weight: 700; color: #ef4b23;"> / </span>
+                                Cyber Security
+                                Influencer Marketing
+                                <span style="font-weight: 700; color: #b2b4b8;"> / </span>
+                                GenShark Engine
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0; vertical-align: top;">
+                                <div style="display: flex; align-items: center; width: 100%;">
+                                    <div style="font-size: 12.8px; color: #060916; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: 500;">
+                                        <a href="tel:${formattedPhone}" style="color: #060916; text-decoration: none;">${phone}</a>
+                                    </div>
+                                    <div style="display: flex; gap: 8px; padding-left: 24px;">
+                                        <a href="${linkedin}" target="_blank" style="text-decoration: none;">
+                                            <img src="${linkedinIcon}" alt="LinkedIn" style="width: 12px; height: 12px; display: block; border: 0;" />
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="font-size: 10px; padding-top: 10px; text-align: justify; vertical-align: top; color: #060916;">The content of this email is confidential and intended for the recipient specified in message only. It is strictly forbidden to share any part of this message with any third party, without a written consent of the sender. If you received this message by mistake, please reply to this message and follow with its deletion, so that we can ensure such a mistake does not occur in the future.</td>
+                        </tr>
+                    </table>
+                </body>
+                </html>
+            `;
+
+            const preview = document.getElementById('preview');
+            preview.innerHTML = template;
+
+            const newWindow = window.open('', '_blank');
+            if (newWindow) {
+                newWindow.document.write(template);
+                newWindow.document.close();
+            }
+        });
+    </script>
+</body>
+</html>

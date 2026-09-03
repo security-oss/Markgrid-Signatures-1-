@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signature Generators</title>
+    <style>
+        body {
+            background: #f7fafd;
+            font-family: 'Roboto', Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: #fff;
+            padding: 2.5rem 2rem 2rem 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 24px rgba(0,0,0,0.10);
+            text-align: center;
+            max-width: 480px;
+            width: calc(100% - 2rem);
+        }
+        h1 {
+            color: #1976d2;
+            margin-bottom: 0.5rem;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+        p {
+            color: #4a4a4a;
+            font-size: 1.05rem;
+            margin-bottom: 2rem;
+        }
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn {
+            background: #1976d2;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 0.95rem 1.75rem;
+            font-size: 1.05rem;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: background 0.2s, box-shadow 0.2s;
+            box-shadow: 0 1px 3px rgba(25,118,210,0.13);
+        }
+        .btn:hover, .btn:focus {
+            background: #145ea8;
+            outline: none;
+        }
+        .btn.two99 {
+            background: #0070ff;
+        }
+        .btn.two99:hover, .btn.two99:focus {
+            background: #0056b3;
+        }
+        .btn.markgrid {
+            background: #5A5AEE;
+        }
+        .btn.markgrid:hover, .btn.markgrid:focus {
+            background: #4747c7;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Signature Generators</h1>
+        <p>Choose a brand to create an email signature.</p>
+        <div class="btn-group">
+            <a class="btn markgrid" href="markgrid/">Markgrid</a>
+            <a class="btn two99" href="two99/">Two99</a>
+        </div>
+    </div>
+</body>
+</html>
