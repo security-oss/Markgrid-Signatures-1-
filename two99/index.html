@@ -126,22 +126,22 @@
                 <label>Logo style:</label>
                 <div class="logo-grid" id="logoGrid" role="radiogroup" aria-label="Logo style">
                     <label class="logo-option selected">
-                        <input type="radio" name="logoStyle" value="profile_logomark_light" data-has-wordmark="true" data-theme="light" checked>
+                        <input type="radio" name="logoStyle" value="profile_logomark_light" checked>
                         <img src="images/profile_logomark_light.jpg" alt="Logomark light">
                         <span class="caption">Logomark · Light</span>
                     </label>
                     <label class="logo-option">
-                        <input type="radio" name="logoStyle" value="profile_logomark_dark" data-has-wordmark="true" data-theme="dark">
+                        <input type="radio" name="logoStyle" value="profile_logomark_dark">
                         <img src="images/profile_logomark_dark.jpg" alt="Logomark dark">
                         <span class="caption">Logomark · Dark</span>
                     </label>
                     <label class="logo-option">
-                        <input type="radio" name="logoStyle" value="profile_logo_light" data-has-wordmark="false" data-theme="light">
+                        <input type="radio" name="logoStyle" value="profile_logo_light">
                         <img src="images/profile_logo_light.jpg" alt="Full logo light">
                         <span class="caption">Full logo · Light</span>
                     </label>
                     <label class="logo-option">
-                        <input type="radio" name="logoStyle" value="profile_logo_dark" data-has-wordmark="false" data-theme="dark">
+                        <input type="radio" name="logoStyle" value="profile_logo_dark">
                         <img src="images/profile_logo_dark.jpg" alt="Full logo dark">
                         <span class="caption">Full logo · Dark</span>
                     </label>
@@ -200,8 +200,6 @@
 
             const selected = document.querySelector('input[name="logoStyle"]:checked');
             const logoFile = selected.value;
-            const showWordmark = selected.dataset.hasWordmark === 'true';
-            const theme = selected.dataset.theme;
 
             let baseUrl = window.location.href.split('?')[0].split('#')[0];
             if (baseUrl.endsWith('index.html')) {
@@ -210,14 +208,11 @@
             if (!baseUrl.endsWith('/')) baseUrl += '/';
 
             const leftLogo = baseUrl + 'images/' + logoFile + '.jpg';
-            const wordmark = baseUrl + 'images/wordmark.png';
-            const wordmarkDark = baseUrl + 'images/wordmark-dark.png';
+            // Always use dark TWO99 wordmark (visible on white email backgrounds)
+            const wordmarkSrc = baseUrl + 'images/wordmark.png';
             const linkedinIcon = baseUrl + 'images/li.png';
-            const wordmarkSrc = theme === 'dark' ? wordmarkDark : wordmark;
 
-            const wordmarkRow = showWordmark
-                ? `<img src="${wordmarkSrc}" alt="TWO99 Logo" style="width: 147px; height: auto; max-height: 28px; display: block; border: 0;" />`
-                : '';
+            const wordmarkRow = `<img src="${wordmarkSrc}" alt="TWO99 Logo" style="width: 147px; height: auto; max-height: 28px; display: block; border: 0;" />`;
 
             const template = `
                 <!DOCTYPE html>
